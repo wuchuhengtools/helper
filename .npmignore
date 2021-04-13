@@ -1,0 +1,7 @@
+*
+!/dist/*
+!READER.md
+!package.json
+!src/typings/*
+
+
