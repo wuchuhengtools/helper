@@ -6,6 +6,11 @@
   "scripts": {
     "build": "tsc"
   },
+  "homepage": "https://github.com/wuchuhengtools/helper",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/wuchuhengtools/helper"
+  },
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^26.0.22",
