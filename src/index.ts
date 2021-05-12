@@ -16,14 +16,12 @@ export default hello
  * @param file
  */
 export const fileToBase64 = (file: File): Promise<string> => {
-    return new Promise<string>((resolve, reject) => {
+    return new Promise((resolve, reject) => {
         const reader = new FileReader();
         reader.readAsDataURL(file);
-        reader.onload = () => {
-            typeof reader.result === 'string' && resolve(reader.result) || reject()
-        };
+        reader.onload = () => resolve(reader.result as string);
         reader.onerror = error => reject(error);
-    })
+    });
 }
 /**
  *  对象转请求链接参数
