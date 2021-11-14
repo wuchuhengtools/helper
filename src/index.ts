@@ -41,6 +41,27 @@ export const obj2Query = (obj: Record<string, number | string>): string => {
 }
 
 /**
+ *  复制文件到粘贴板上
+ * @param str
+ */
+export const copyStringToClipboard = (str: string): void => {
+    // Create new element
+    const el = document.createElement('textarea');
+    // Set value (string to be copied)
+    el.value = str;
+    // Set non-editable to avoid focus and move outside of view
+    el.setAttribute('readonly', '');
+    el.style = {position: 'absolute', left: '-9999px'};
+    document.body.appendChild(el);
+    // Select text inside element
+    el.select();
+    // Copy text to clipboard
+    document.execCommand('copy');
+    // Remove temporary element
+    document.body.removeChild(el);
+}
+
+/**
  * query 转obj
  * @param query
  */

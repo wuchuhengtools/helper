@@ -16,6 +16,9 @@ fileToBase64(file).then(bash64 => console.log(bash64)) // image:sdafasfasd....
 obj2Query({foo: 1, bar: 2}) // return ?foo=1&bar=2
 query2Obj('foo=1&bar=2') // return {bar: 2, foo: 1}
 getHash('1234')  // sdfkasjfasdkskskfsadf ...
+getHash('1234')  // sdfkasjfasdkskskfsadf ...
+copyStringToClipboard(str: string) // coped string
+
 ```
 ## Contributing
 
