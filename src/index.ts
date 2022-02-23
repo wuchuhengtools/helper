@@ -96,3 +96,44 @@ export const getHash = (str: string, algo = 'SHA-256'): Promise<string> => {
             return Promise.resolve(result)
         })
 }
+
+type DebounceFunType  = () => void
+type DebounceWaitType  = number
+
+/**
+ * 防抖
+ * @param func
+ * @param wait
+ */
+export const debounce = (func: DebounceFunType, wait: DebounceWaitType): () => void => {
+    let timer: ReturnType<typeof setTimeout>;
+
+    return () => {
+        timer && clearTimeout(timer)
+        timer = setTimeout(() => {
+            func()
+        }, wait)
+    }
+}
+
+type throttlingFunType = () => void;
+type throttlingWaitType = number;
+
+/**
+ * 节流
+ * @param fun
+ * @param wait
+ */
+export const throttling = (fun: throttlingFunType, wait: throttlingWaitType) => {
+    type TimeOutType  = ReturnType<typeof setTimeout> ;
+    let timer: TimeOutType | boolean
+    return () => {
+        if (!timer) {
+            timer = setTimeout(() => {
+                fun()
+                clearTimeout(timer as TimeOutType)
+                timer = false
+            }, wait)
+        }
+    }
+}
