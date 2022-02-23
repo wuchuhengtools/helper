@@ -19,6 +19,17 @@ getHash('1234')  // sdfkasjfasdkskskfsadf ...
 getHash('1234')  // sdfkasjfasdkskskfsadf ...
 copyStringToClipboard(str: string) // coped string
 
+// debounce
+const debounceHandler = debounce((data: {hello: string}) => {
+    // todo something ...
+}, 1000)
+debounceHandler({hello: 'Are you OK?'})
+
+// throttling 
+const throttlingHandler = throttling(() => {
+    // todo something ...
+}, 1000)
+throttlingHandler()
 ```
 ## Contributing
 

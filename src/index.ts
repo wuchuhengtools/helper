@@ -46,12 +46,11 @@ export const obj2Query = (obj: Record<string, number | string>): string => {
  */
 export const copyStringToClipboard = (str: string): void => {
     // Create new element
-    const el = document.createElement('textarea');
+    const el = document.createElement('textarea') as HTMLTextAreaElement
     // Set value (string to be copied)
     el.value = str;
     // Set non-editable to avoid focus and move outside of view
-    el.setAttribute('readonly', '');
-    el.style = {position: 'absolute', left: '-9999px'};
+    el.setAttribute("style", "position: 'absolute'; left: '-9999px'")
     document.body.appendChild(el);
     // Select text inside element
     el.select();
@@ -102,49 +101,52 @@ type DebounceWaitType  = number
 
 /**
  * 防抖
- * @param func
+ * @param callback
  * @param wait
  */
 export const debounce = <
     T,
     U = T extends null | undefined | never ?  () => void : (data: T) => void
-    >(func:U, wait: DebounceWaitType): U => {
+    >(callback:U, wait: DebounceWaitType): U => {
     let timer: ReturnType<typeof setTimeout>;
 
     const res = (params?: T) => {
         timer && clearTimeout(timer)
         timer = setTimeout(() => {
-            params && func(params) || func()
+            // @ts-ignore
+            params && callback(params) || callback()
         }, wait)
     }
 
+    // @ts-ignore
     return res as U
 }
 
 type throttlingWaitType = number;
-type CallbackType<T, U = T extends null | undefined | never ?  () => void : (data: T) => void> =  (callback: U, wait: throttlingWaitType) => U
 
 /**
  * 节流
- * @param fun
+ * @param callback
  * @param wait
  */
 export const throttling = <
     T,
     U = T extends null | undefined | never ?  () => void : (data: T) => void
-    >(fun: U, wait: throttlingWaitType): U => {
+    >(callback: U, wait: throttlingWaitType): U => {
     type TimeOutType  = ReturnType<typeof setTimeout> ;
     let timer: TimeOutType | boolean
 
     const res = (data: T) => {
         if (!timer) {
             timer = setTimeout(() => {
-                data && fun(data) || fun()
+                // @ts-ignore
+                data && callback(data) || callback()
                 clearTimeout(timer as TimeOutType)
                 timer = false
             }, wait)
         }
     }
 
+    // @ts-ignore
     return res as U
 }
