@@ -97,7 +97,7 @@ export const getHash = (str: string, algo = 'SHA-256'): Promise<string> => {
         })
 }
 
-type DebounceFunType  = () => void
+type DebounceFunType  = <T>(params?: T) => void
 type DebounceWaitType  = number
 
 /**
@@ -105,35 +105,46 @@ type DebounceWaitType  = number
  * @param func
  * @param wait
  */
-export const debounce = (func: DebounceFunType, wait: DebounceWaitType): () => void => {
+export const debounce = <
+    T,
+    U = T extends null | undefined | never ?  () => void : (data: T) => void
+    >(func:U, wait: DebounceWaitType): U => {
     let timer: ReturnType<typeof setTimeout>;
 
-    return () => {
+    const res = (params?: T) => {
         timer && clearTimeout(timer)
         timer = setTimeout(() => {
-            func()
+            params && func(params) || func()
         }, wait)
     }
+
+    return res as U
 }
 
-type throttlingFunType = () => void;
 type throttlingWaitType = number;
+type CallbackType<T, U = T extends null | undefined | never ?  () => void : (data: T) => void> =  (callback: U, wait: throttlingWaitType) => U
 
 /**
  * 节流
  * @param fun
  * @param wait
  */
-export const throttling = (fun: throttlingFunType, wait: throttlingWaitType) => {
+export const throttling = <
+    T,
+    U = T extends null | undefined | never ?  () => void : (data: T) => void
+    >(fun: U, wait: throttlingWaitType): U => {
     type TimeOutType  = ReturnType<typeof setTimeout> ;
     let timer: TimeOutType | boolean
-    return () => {
+
+    const res = (data: T) => {
         if (!timer) {
             timer = setTimeout(() => {
-                fun()
+                data && fun(data) || fun()
                 clearTimeout(timer as TimeOutType)
                 timer = false
             }, wait)
         }
     }
+
+    return res as U
 }
