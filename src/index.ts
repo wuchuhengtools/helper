@@ -104,22 +104,35 @@ type DebounceWaitType  = number
  * @param callback
  * @param wait
  */
-export const debounce = <
-    T,
-    U = T extends null | undefined | never ?  () => void : (data: T) => void
-    >(callback:U, wait: DebounceWaitType): U => {
-    let timer: ReturnType<typeof setTimeout>;
+const debounce = <T>(fn: (params: T) => void, wait: number): (params: T) => void => {
+    let timer: number, timeStamp:number =0;
+    let context, args;
 
-    const res = (params?: T) => {
-        timer && clearTimeout(timer)
-        timer = setTimeout(() => {
-            // @ts-ignore
-            params && callback(params) || callback()
-        }, wait)
+    let run = ()=>{
+        timer= setTimeout(()=>{
+            fn.apply(context,args);
+        },wait);
     }
 
-    // @ts-ignore
-    return res as U
+    let clean = () => {
+        clearTimeout(timer);
+    }
+
+    return function() {
+        context = this;
+        args = arguments;
+        let now = (new Date()).getTime();
+        if (now-timeStamp < wait) {
+            console.log('reset',now);
+            // 清除定时器，并重新加入延迟
+            clean();
+            run();
+        } else {
+            console.log('set',now);
+            run();  // last timer alreay executed, set a new timer
+        }
+        timeStamp = now;
+    }
 }
 
 type throttlingWaitType = number;
