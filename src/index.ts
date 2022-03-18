@@ -7,10 +7,6 @@
  * @listen MIT
  */
 
-const hello = (): Hellotype => "hello"
-
-export default hello
-
 /**
  * 文件转base64
  * @param file
@@ -96,44 +92,22 @@ export const getHash = (str: string, algo = 'SHA-256'): Promise<string> => {
         })
 }
 
-type DebounceFunType  = <T>(params?: T) => void
-type DebounceWaitType  = number
-
 /**
  * 防抖
  * @param callback
  * @param wait
  */
-const debounce = <T>(fn: (params: T) => void, wait: number): (params: T) => void => {
-    let timer: number, timeStamp:number =0;
-    let context, args;
+export const debounce = <T>(callback: (params: T) => void, wait: number): (params: T) => void => {
+    let timer: ReturnType<typeof setTimeout>;
 
-    let run = ()=>{
-        timer= setTimeout(()=>{
-            fn.apply(context,args);
-        },wait);
-    }
-
-    let clean = () => {
-        clearTimeout(timer);
-    }
-
-    return function() {
-        context = this;
-        args = arguments;
-        let now = (new Date()).getTime();
-        if (now-timeStamp < wait) {
-            console.log('reset',now);
-            // 清除定时器，并重新加入延迟
-            clean();
-            run();
-        } else {
-            console.log('set',now);
-            run();  // last timer alreay executed, set a new timer
-        }
-        timeStamp = now;
+    return (keyword) => {
+        timer && clearTimeout(timer)
+        timer = setTimeout(() => {
+            callback(keyword)
+        }, wait)
     }
 }
+
 
 type throttlingWaitType = number;
 
