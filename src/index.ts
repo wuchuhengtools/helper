@@ -1,4 +1,3 @@
-/// <reference path="./typings/index.d.ts" />
 /**
  * The file is part of @wuchuhengtools/request
  *
@@ -79,17 +78,10 @@ export const query2Obj = (query: string): Record<string, string> => {
  * @param str
  * @param algo
  */
-export const getHash = (str: string, algo = 'SHA-256'): Promise<string> => {
-    const strBuf = new TextEncoder().encode(str)
-    return crypto.subtle.digest(algo, strBuf)
-        .then(hash => {
-            let result = ''
-            const view = new DataView(hash)
-            for (let i = 0; i < hash.byteLength; i += 4) {
-                result += ('00000000' + view.getUint32(i).toString(16)).slice(-8)
-            }
-            return Promise.resolve(result)
-        })
+export const getHash = (str: string, algo: 'SHA-256' | 'md5'): Promise<string> => {
+   const crypto = require('crypto');
+
+    return crypto.createHash(algo).update(str).digest('hex');
 }
 
 /**
