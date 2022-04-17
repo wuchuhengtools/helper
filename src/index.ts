@@ -68,7 +68,8 @@ export const query2Obj = (query: string): Record<string, string> => {
 
     for (const e of query.split('&')) {
         const [k, v] = e.split('=')
-        res[k] = v
+        if (v === 'undefined') continue
+        res[k] = decodeURI(v)
     }
     return res
 }
