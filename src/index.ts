@@ -5,24 +5,6 @@
  * @listen MIT
  */
 
-// Cross-platform crypto support
-let crypto: any;
-let isBrowser = false;
-
-try {
-  // Try to detect if we're in a browser environment
-  if (typeof window !== 'undefined' && typeof window.crypto !== 'undefined') {
-    isBrowser = true;
-    crypto = window.crypto;
-  } else {
-    // We're in Node.js, import the crypto module
-    crypto = require('crypto');
-  }
-} catch (e) {
-  // Fallback for environments where crypto is not available
-  console.warn('Crypto module not available. Hash functions will not work.');
-}
-
 /**
  * Convert file to base64
  * @description This function reads a file and converts it to a base64 encoded string.
@@ -116,27 +98,50 @@ export const query2Obj = (query: string): Record<string, string> => {
  * @param str - The string to hash
  * @param algo - The hash algorithm to use
  */
-export const getHash = async (str: string, algo: "SHA-256" | "md5" = "SHA-256"): Promise<string> => {
+export const getHash = async (
+  str: string,
+  algo: "SHA-256" | "md5" = "SHA-256"
+): Promise<string> => {
+  // Cross-platform crypto support
+  let crypto: any;
+  let isBrowser = false;
+
+  try {
+    // Try to detect if we're in a browser environment
+    if (typeof window !== "undefined" && typeof window.crypto !== "undefined") {
+      isBrowser = true;
+      crypto = window.crypto;
+    } else {
+      // We're in Node.js, import the crypto module
+      crypto = require("crypto");
+    }
+  } catch (e) {
+    // Fallback for environments where crypto is not available
+    console.warn("Crypto module not available. Hash functions will not work.");
+  }
+
   if (!crypto) {
-    throw new Error('Crypto module not available in this environment');
+    throw new Error("Crypto module not available in this environment");
   }
 
   if (isBrowser) {
     // Browser implementation using Web Crypto API
     if (algo === "md5") {
-      throw new Error('MD5 is not supported in browser environments. Use SHA-256 instead.');
+      throw new Error(
+        "MD5 is not supported in browser environments. Use SHA-256 instead."
+      );
     }
-    
+
     const encoder = new TextEncoder();
     const data = encoder.encode(str);
-    const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+    const hashBuffer = await crypto.subtle.digest("SHA-256", data);
     const hashArray = Array.from(new Uint8Array(hashBuffer));
-    return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+    return hashArray.map((b) => b.toString(16).padStart(2, "0")).join("");
   } else {
     // Node.js implementation
     const hash = crypto.createHash(algo === "SHA-256" ? "sha256" : "md5");
     hash.update(str);
-    return hash.digest('hex');
+    return hash.digest("hex");
   }
 };
 
@@ -208,4 +213,9 @@ export const throttling = <
 };
 
 // React Components
-export { ResizableWrapper, type ResizableWrapperProps, type ResizableWrapperHandle, type ResizeData } from './react/ResizeWrapper';
+export {
+  ResizableWrapper,
+  type ResizableWrapperProps,
+  type ResizableWrapperHandle,
+  type ResizeData,
+} from "./react/ResizeWrapper";
