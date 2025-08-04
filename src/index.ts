@@ -217,6 +217,4 @@ export const throttling = <
 export {
   ResizableWrapper,
   type ResizableWrapperProps,
-  type ResizableWrapperHandle,
-  type ResizeData,
 } from "./react/ResizeWrapper";

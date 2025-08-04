@@ -43,35 +43,22 @@ import { ResizableWrapper } from "@wuchuhengtools/helper"
   <div>Your resizable content here</div>
 </ResizableWrapper>
 
-// Advanced usage with all features
-const resizableRef = useRef(null);
-
+// Advanced usage with configuration
 <ResizableWrapper 
-  ref={resizableRef}
   minWidth={150} 
   maxWidth={800} 
   initialWidth={300}
   className="my-custom-class"
-  disabled={false}
-  onResizeStart={(data) => console.log('Resize started:', data)}
-  onResize={(data) => console.log('Resizing:', data.width)}
-  onResizeEnd={(data) => console.log('Resize ended:', data)}
-  handleStyle={{ backgroundColor: '#007bff' }}
-  handleClassName="custom-handle"
 >
   <div>Your resizable content here</div>
 </ResizableWrapper>
-
-// Programmatic control via ref
-resizableRef.current?.setWidth(400);
-const currentWidth = resizableRef.current?.getWidth();
 ```
 
 ## React Components
 
 ### ResizableWrapper
 
-A highly customizable React component that makes its children resizable with a drag handle.
+A React component that makes its children horizontally resizable with a drag handle on the right edge.
 
 **Props:**
 - `children` (ReactNode): The content to make resizable
@@ -79,37 +66,28 @@ A highly customizable React component that makes its children resizable with a d
 - `maxWidth?` (number): Maximum width in pixels (default: 500)  
 - `initialWidth?` (number): Initial width in pixels (default: 240)
 - `className?` (string): Additional CSS classes to apply
-- `style?` (React.CSSProperties): Inline styles for the container
-- `disabled?` (boolean): Whether resizing is disabled (default: false)
-- `onResizeStart?` (function): Callback fired when resize starts
-- `onResize?` (function): Callback fired during resize
-- `onResizeEnd?` (function): Callback fired when resize ends
-- `handleStyle?` (React.CSSProperties): Inline styles for the resize handle
-- `handleClassName?` (string): CSS classes for the resize handle
-
-**Ref Methods (via forwardRef):**
-- `getWidth()`: Returns current width
-- `setWidth(width)`: Sets width programmatically  
-- `getElement()`: Returns the container DOM element
 
 **Features:**
 - 🖱️ Mouse drag resizing from the right edge
-- ⌨️ Keyboard resizing with arrow keys (Left/Right)
 - 📏 Respects min/max width constraints
-- 🎨 Visual feedback during resize with hover effects
-- 🔧 Programmatic control via ref
-- ♿ Full accessibility support with ARIA attributes
-- 🎯 Event callbacks for resize lifecycle
-- 🎨 Customizable styling for container and handle
-- 🚫 Disabled state support
+- 🎨 Visual feedback during resize with smooth transitions
+- 🎯 Tailwind CSS styling (customizable)
 - ⚡ Optimized performance with React hooks
 - 📱 TypeScript support with full type definitions
 
-**Accessibility:**
-- ARIA roles and labels for screen readers
-- Keyboard navigation support
-- Focusable resize handle
-- Semantic HTML structure
+**Example:**
+```tsx
+<ResizableWrapper
+  minWidth={200}
+  maxWidth={600}
+  initialWidth={350}
+  className="border border-gray-300 bg-white"
+>
+  <div className="p-4">
+    <h2>Resizable Sidebar</h2>
+    <p>Drag the right edge to resize!</p>
+  </div>
+</ResizableWrapper>
 
 ```
 ## Contributing
