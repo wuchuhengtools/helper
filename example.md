@@ -1,5 +1,32 @@
 # Usage Examples
 
+## Installation
+
+```bash
+npm install @wuchuhengtools/helper
+
+# For React components, also install React (peer dependency)
+npm install react react-dom
+```
+
+The library supports both CommonJS and ESM:
+
+```javascript
+// CommonJS
+const { fileToBase64, ResizableWrapper } = require('@wuchuhengtools/helper');
+
+// ESM
+import { fileToBase64, ResizableWrapper } from '@wuchuhengtools/helper';
+
+// TypeScript with full type support
+import { 
+  ResizableWrapper, 
+  type ResizableWrapperProps, 
+  type ResizableWrapperHandle,
+  type ResizeData 
+} from '@wuchuhengtools/helper';
+```
+
 ## React Component Usage
 
 ### Basic Usage

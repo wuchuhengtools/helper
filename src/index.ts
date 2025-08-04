@@ -168,4 +168,4 @@ export const throttling = <
 };
 
 // React Components
-export { ResizableWrapper } from './react/ResizeWrapper';
+export { ResizableWrapper, type ResizableWrapperProps, type ResizableWrapperHandle, type ResizeData } from './react/ResizeWrapper';

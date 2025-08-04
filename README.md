@@ -4,7 +4,11 @@
 
 ```shell
 $ npm i @wuchuhengtools/helper
+```
 
+For React components, you'll also need React as a peer dependency:
+```shell
+$ npm i react react-dom
 ```
 
 ## Usage

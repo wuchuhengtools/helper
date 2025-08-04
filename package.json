@@ -2,13 +2,27 @@
   "name": "@wuchuheng/helper",
   "version": "1.0.12",
   "main": "dist/index.js",
+  "module": "dist/index.mjs",
   "types": "dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/index.mjs",
+      "require": "./dist/index.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "sideEffects": false,
   "scripts": {
-    "build": "npm run build:release",
-    "build:dev": "tsc",
-    "build:release": "tsc --sourceMap false --declarationMap false",
+    "build": "tsup",
+    "build:dev": "tsup --sourcemap",
+    "build:release": "tsup --minify",
+    "build:watch": "tsup --watch",
     "test": "jest --config=jest.config.js",
-    "publish": "npm publish --access public"
+    "publish": "npm run build:release && npm publish --access public",
+    "dev": "tsup --watch --onSuccess \"echo Build completed!\""
   },
   "homepage": "https://github.com/wuchuhengtools/helper",
   "repository": {
@@ -18,12 +32,13 @@
   "license": "MIT",
   "devDependencies": {
     "@types/jest": "^27.4.1",
-    "@types/node": "^14.14.37",
+    "@types/node": "^20.19.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "codecov": "^3.8.1",
     "jest": "^27.5.1",
     "ts-jest": "^27.1.4",
+    "tsup": "^8.5.0",
     "typescript": "^4.2.4"
   },
   "peerDependencies": {

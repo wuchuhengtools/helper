@@ -6,7 +6,7 @@ import React, { useState, useCallback, useEffect, ReactNode, forwardRef, useImpe
  * Data object passed to resize event callbacks containing resize information
  * @interface ResizeData
  */
-interface ResizeData {
+export interface ResizeData {
   /** Current width of the resizable container in pixels */
   width: number;
   /** Change in X position since resize started */
@@ -19,7 +19,7 @@ interface ResizeData {
  * Props interface for the ResizableWrapper component
  * @interface ResizableWrapperProps
  */
-interface ResizableWrapperProps {
+export interface ResizableWrapperProps {
   /** Content to be rendered inside the resizable container */
   children: ReactNode;
   /** Minimum allowed width in pixels @default 200 */
@@ -50,7 +50,7 @@ interface ResizableWrapperProps {
  * Imperative handle interface exposed via ref for programmatic control
  * @interface ResizableWrapperHandle
  */
-interface ResizableWrapperHandle {
+export interface ResizableWrapperHandle {
   /** Get the current width of the container */
   getWidth: () => number;
   /** Set the width of the container programmatically */
