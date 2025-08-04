@@ -4,6 +4,7 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
+    "build": "npm run build:release",
     "build:dev": "tsc",
     "build:release": "tsc --sourceMap false --declarationMap false",
     "test": "jest --config=jest.config.js",
