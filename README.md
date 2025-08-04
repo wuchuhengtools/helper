@@ -65,13 +65,14 @@ A React component that makes its children horizontally resizable with a drag han
 - `minWidth?` (number): Minimum width in pixels (default: 200)
 - `maxWidth?` (number): Maximum width in pixels (default: 500)  
 - `initialWidth?` (number): Initial width in pixels (default: 240)
-- `className?` (string): Additional CSS classes to apply
+- `className?` (string): Additional CSS classes to apply to the container
+- `style?` (React.CSSProperties): Inline styles for the container
 
 **Features:**
 - 🖱️ Mouse drag resizing from the right edge
 - 📏 Respects min/max width constraints
 - 🎨 Visual feedback during resize with smooth transitions
-- 🎯 Tailwind CSS styling (customizable)
+- 🎯 Framework-agnostic styling with inline styles
 - ⚡ Optimized performance with React hooks
 - 📱 TypeScript support with full type definitions
 
@@ -81,9 +82,13 @@ A React component that makes its children horizontally resizable with a drag han
   minWidth={200}
   maxWidth={600}
   initialWidth={350}
-  className="border border-gray-300 bg-white"
+  style={{
+    border: '1px solid #ccc',
+    borderRadius: '8px',
+    backgroundColor: '#f9f9f9'
+  }}
 >
-  <div className="p-4">
+  <div style={{ padding: '16px' }}>
     <h2>Resizable Sidebar</h2>
     <p>Drag the right edge to resize!</p>
   </div>

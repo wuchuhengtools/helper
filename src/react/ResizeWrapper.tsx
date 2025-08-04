@@ -16,6 +16,9 @@ export interface ResizableWrapperProps {
   className?: string;
   /** Inline styles for the container */
   style?: React.CSSProperties;
+
+  borderColor?: string;
+  activeBorderColor?: string;
 }
 
 /**
@@ -83,6 +86,8 @@ export const ResizableWrapper: React.FC<ResizableWrapperProps> = ({
   initialWidth = 240,
   className = '',
   style = {},
+  borderColor = '#ccc',
+  activeBorderColor = '#3b82f6',
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [width, setWidth] = useState(initialWidth);
@@ -152,19 +157,19 @@ export const ResizableWrapper: React.FC<ResizableWrapperProps> = ({
           top: 0,
           width: '4px',
           cursor: 'col-resize',
-          backgroundColor: isResizing ? 'rgba(59, 130, 246, 0.7)' : 'transparent',
+          backgroundColor: isResizing ? activeBorderColor :  borderColor,
           transition: 'background-color 150ms ease-in-out',
           zIndex: 10,
         }}
         onMouseDown={handleMouseDown}
         onMouseEnter={(e) => {
           if (!isResizing) {
-            e.currentTarget.style.backgroundColor = 'rgba(59, 130, 246, 0.5)';
+            e.currentTarget.style.backgroundColor = activeBorderColor
           }
         }}
         onMouseLeave={(e) => {
           if (!isResizing) {
-            e.currentTarget.style.backgroundColor = 'transparent';
+            e.currentTarget.style.backgroundColor = borderColor;
           }
         }}
       >
@@ -173,7 +178,7 @@ export const ResizableWrapper: React.FC<ResizableWrapperProps> = ({
           style={{
             height: '100%',
             width: '100%',
-            backgroundColor: isResizing ? 'rgb(59, 130, 246)' : 'transparent',
+            backgroundColor: isResizing ? activeBorderColor : borderColor,
             transition: 'background-color 150ms ease-in-out',
           }}
         />
