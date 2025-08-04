@@ -16,7 +16,7 @@
   ],
   "sideEffects": false,
   "scripts": {
-    "build": "tsup",
+    "build": "npm run build:release",
     "build:dev": "tsup --sourcemap",
     "build:release": "tsup --minify",
     "build:watch": "tsup --watch",
