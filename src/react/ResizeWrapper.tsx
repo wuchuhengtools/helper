@@ -162,7 +162,7 @@ export const ResizableWrapper: React.FC<ResizableWrapperProps> = ({
           bottom: 0,
           right: 0,
           top: 0,
-          width: borderColor,
+          width: borderWidth,
           cursor: "col-resize",
           backgroundColor: isResizing ? activeBorderColor : borderColor,
           transition: "background-color 150ms ease-in-out",
