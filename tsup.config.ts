@@ -7,8 +7,8 @@ export default defineConfig((options) => ({
   sourcemap: true,
   clean: true,
   splitting: false,
-  // Externalize peer dependencies
-  external: ['react', 'react-dom', 'crypto'],
+  // Externalize peer dependencies - remove crypto since we handle it manually
+  external: ['react', 'react-dom'],
   // Generate both .js and .mjs files
   outExtension({ format }) {
     return {
@@ -25,5 +25,10 @@ export default defineConfig((options) => ({
   esbuildOptions(esbuildOptions) {
     esbuildOptions.jsx = 'automatic'
     esbuildOptions.jsxImportSource = 'react'
+    // Don't bundle crypto - let it be resolved at runtime
+    esbuildOptions.external = esbuildOptions.external || []
+    if (!esbuildOptions.external.includes('crypto')) {
+      esbuildOptions.external.push('crypto')
+    }
   },
 }))
