@@ -1,0 +1,44 @@
+# Publish a new version to npmjs.org
+
+name: Release to NPM
+
+on:
+  push:
+    tags:
+      - 'v*'
+
+jobs:
+  publish:
+    runs-on: ubuntu-latest
+    
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+        
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22.14'
+          registry-url: 'https://registry.npmjs.org'
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Update the version into package.json without prefix 'v'
+        run: |
+          version=$(echo ${{ github.ref }} | sed -n -e 's/refs\/tags\/v\(.*\)/\1/p')
+          echo "version: $version"
+          npm version --no-git-tag-version $version
+        
+      - name: Build (if build script exists)
+        run: |
+          if [ -n "$(npm run --silent build 2>/dev/null || true)" ]; then
+            npm run build
+          else
+            echo "No build script found, skipping build step"
+          fi
+        
+      - name: Publish to NPM
+        run: npm publish --access public
+        env:
+          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
