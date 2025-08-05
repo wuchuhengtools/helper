@@ -246,8 +246,21 @@ export const sleep = (ms: number): Promise<void> => {
   });
 };
 
-// React Components
 export {
   ResizableWrapper,
   type ResizableWrapperProps,
 } from "./react/ResizeWrapper"
+
+/**
+ * Exports the `VisibleAreaReporter` component and the `VisibleAreaInput` type from the `./react/VisibleAreaReporter` module.
+ *
+ * @remarks
+ * - `VisibleAreaReporter`: A React component for reporting the visible area.
+ * - `VisibleAreaInput`: Type definition for the input props of `VisibleAreaReporter`.
+ *
+ * @packageDocumentation
+ */
+export {
+  VisibleAreaReporter,
+  type VisibleAreaInput
+} from "./react/VisibleAreaReporter"
