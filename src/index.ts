@@ -264,3 +264,8 @@ export {
   VisibleAreaReporter,
   type VisibleAreaInput
 } from "./react/VisibleAreaReporter"
+
+export {
+  ContextMenu,
+  type ContextMenuAction,
+}  from './react/ContextMenu'

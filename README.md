@@ -36,7 +36,7 @@ const throttlingHandler = throttling(() => {
 throttlingHandler()
 
 // React Components
-import { ResizableWrapper } from "@wuchuhengtools/helper"
+import { ResizableWrapper, ContextMenu, VisibleAreaReporter } from "@wuchuhengtools/helper"
 
 // Basic usage
 <ResizableWrapper>
@@ -52,6 +52,25 @@ import { ResizableWrapper } from "@wuchuhengtools/helper"
 >
   <div>Your resizable content here</div>
 </ResizableWrapper>
+
+// Context Menu usage
+<ContextMenu
+  itemId={item.id}
+  actions={[
+    { label: 'Edit', onClick: (id) => editItem(id) },
+    { label: 'Delete', onClick: (id) => deleteItem(id) },
+    { label: 'Copy', onClick: (id) => copyItem(id) }
+  ]}
+>
+  <div>Right-click me for context menu</div>
+</ContextMenu>
+
+// Visible Area Reporter usage
+<VisibleAreaReporter
+  onChange={(area) => console.log('Visible area:', area)}
+>
+  <div>This div's visible area will be tracked</div>
+</VisibleAreaReporter>
 ```
 
 ## React Components
@@ -93,7 +112,98 @@ A React component that makes its children horizontally resizable with a drag han
     <p>Drag the right edge to resize!</p>
   </div>
 </ResizableWrapper>
+```
 
+### ContextMenu
+
+A reusable React context menu component that displays a custom menu on right-click. Perfect for adding contextual actions to any element.
+
+**Props:**
+- `children` (ReactNode): The React node(s) to wrap with context menu functionality
+- `actions` (ContextMenuAction[]): Array of actions to display in the context menu
+- `itemId` (number): Unique identifier for the item associated with this context menu
+- `onContextMenu?` (function): Optional callback invoked when the context menu is triggered
+
+**ContextMenuAction Type:**
+- `label` (string): Display text for the menu item
+- `onClick` (function): Callback function that receives the itemId when clicked
+- `className?` (string): Optional CSS class for custom styling
+
+**Features:**
+- 🖱️ Right-click activation with precise positioning
+- 🎯 Click-outside detection for automatic menu closing
+- 🎨 Clean, accessible styling with hover effects
+- 📱 TypeScript support with full type definitions
+- ⚡ Optimized performance with proper event handling
+- 🔧 Customizable actions with callback support
+
+**Example:**
+```tsx
+<ContextMenu
+  itemId={user.id}
+  actions={[
+    { 
+      label: 'Edit Profile', 
+      onClick: (id) => navigate(`/profile/edit/${id}`) 
+    },
+    { 
+      label: 'View Details', 
+      onClick: (id) => openUserModal(id) 
+    },
+    { 
+      label: 'Delete User', 
+      onClick: (id) => confirmDelete(id),
+      className: 'text-red-600' 
+    }
+  ]}
+  onContextMenu={(e, id) => console.log('Context menu opened for user', id)}
+>
+  <div className="user-card">
+    <h3>{user.name}</h3>
+    <p>{user.email}</p>
+  </div>
+</ContextMenu>
+```
+
+### VisibleAreaReporter
+
+A React component that monitors and reports the visible area of its content using ResizeObserver for optimal performance.
+
+**Props:**
+- `children?` (ReactNode): Optional content to be rendered inside the reporter
+- `onChange?` (function): Optional callback invoked when the visible area changes
+
+**VisibleAreaInput Type:**
+- `x` (number): The x-coordinate of the visible area's top-left corner
+- `y` (number): The y-coordinate of the visible area's top-left corner  
+- `width` (number): The width of the visible area
+- `height` (number): The height of the visible area
+
+**Features:**
+- 📐 Accurate area calculation using getBoundingClientRect
+- 🔄 Real-time monitoring with ResizeObserver API
+- ⚡ Optimized performance with minimal re-renders
+- 📱 TypeScript support with full type definitions
+- 🎯 Framework-agnostic with clean API design
+- 🛡️ Robust error handling and retry logic
+
+**Example:**
+```tsx
+<VisibleAreaReporter
+  onChange={(area) => {
+    console.log(`Area: ${area.width}x${area.height} at (${area.x}, ${area.y})`);
+    // Update layout or trigger animations based on visible area
+    updateLayout(area);
+  }}
+>
+  <div style={{ padding: '20px', background: '#f0f0f0' }}>
+    <h2>Monitored Content</h2>
+    <p>This content's visible area is being tracked in real-time.</p>
+    <div style={{ height: '200px', background: '#ddd' }}>
+      Resize the window or scroll to see area changes!
+    </div>
+  </div>
+</VisibleAreaReporter>
 ```
 ## Contributing
 
