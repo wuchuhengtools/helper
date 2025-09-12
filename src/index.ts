@@ -269,3 +269,5 @@ export {
   ContextMenu,
   type ContextMenuAction,
 }  from './react/ContextMenu'
+
+export { waitElementPromise } from "./dom.helper"
