@@ -29,7 +29,7 @@
 ## 🚀 Installation
 
 ```shell
-$ npm i @wuchuhengtools/helper
+$ npm i @wuchuheng/helper
 ```
 
 For React components, you'll also need React as a peer dependency:
@@ -46,10 +46,10 @@ import {
   obj2Query, query2Obj,                          // URL & Query
   debounce, throttling, sleep,                   // Performance
   waitElementPromise                             // DOM
-} from "@wuchuhengtools/helper";
+} from "@wuchuheng/helper";
 
 // Import React components
-import { ResizableWrapper, ContextMenu, VisibleAreaReporter } from "@wuchuhengtools/helper";
+import { ResizableWrapper, ContextMenu, VisibleAreaReporter } from "@wuchuheng/helper";
 
 // File operations
 const base64 = await fileToBase64(file);
@@ -201,7 +201,7 @@ copyStringToClipboard(str: string): void
 
 **Example:**
 ```typescript
-import { copyStringToClipboard } from "@wuchuhengtools/helper";
+import { copyStringToClipboard } from "@wuchuheng/helper";
 
 // Copy text to clipboard
 copyStringToClipboard("Hello, World!");
@@ -236,7 +236,7 @@ obj2Query(obj: Record<string, number | string>): string
 
 **Example:**
 ```typescript
-import { obj2Query } from "@wuchuhengtools/helper";
+import { obj2Query } from "@wuchuheng/helper";
 
 // Basic usage
 const params = { page: 1, limit: 10, search: "hello" };
@@ -271,7 +271,7 @@ query2Obj(query: string): Record<string, string>
 
 **Example:**
 ```typescript
-import { query2Obj } from "@wuchuhengtools/helper";
+import { query2Obj } from "@wuchuheng/helper";
 
 // Parse current URL query
 const currentQuery = window.location.search;
@@ -339,7 +339,7 @@ debounce<T>(callback: (params: T) => void, wait: number): (params: T) => void
 
 **Example:**
 ```typescript
-import { debounce } from "@wuchuhengtools/helper";
+import { debounce } from "@wuchuheng/helper";
 
 // Search input debouncing
 const searchHandler = debounce((query: string) => {
@@ -386,7 +386,7 @@ throttling<T>(callback: Function, wait: number): Function
 
 **Example:**
 ```typescript
-import { throttling } from "@wuchuhengtools/helper";
+import { throttling } from "@wuchuheng/helper";
 
 // Scroll event throttling
 const handleScroll = throttling(() => {
@@ -430,7 +430,7 @@ sleep(ms: number): Promise<void>
 
 **Example:**
 ```typescript
-import { sleep } from "@wuchuhengtools/helper";
+import { sleep } from "@wuchuheng/helper";
 
 // Basic usage
 async function delayedOperation() {
@@ -509,7 +509,7 @@ waitElementPromise<T>(selector: string, timeout?: number): Promise<T>
 
 **Example:**
 ```typescript
-import { waitElementPromise } from "@wuchuhengtools/helper";
+import { waitElementPromise } from "@wuchuheng/helper";
 
 // Basic usage - wait for element with default 30s timeout
 try {
@@ -633,7 +633,7 @@ Monitor and report element's visible area.
 
 Contributions are welcome! Please feel free to:
 
-- 🐛 [Report bugs](https://github.com/wuchuhengtools/helper/issues)
+- 🐛 [Report bugs](https://github.com/wuchuheng/helper/issues)
 - 💡 [Request features](https://github.com/wuchuhengtools/helper/issues)
 - 🔧 Submit pull requests
 - 📖 Improve documentation

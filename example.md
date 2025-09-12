@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @wuchuhengtools/helper
+npm install @wuchuheng/helper
 
 # For React components, also install React (peer dependency)
 npm install react react-dom
@@ -24,7 +24,7 @@ import {
   type ResizableWrapperProps, 
   type ResizableWrapperHandle,
   type ResizeData 
-} from '@wuchuhengtools/helper';
+} from '@wuchuheng/helper';
 ```
 
 ## React Component Usage
