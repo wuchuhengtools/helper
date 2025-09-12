@@ -270,4 +270,7 @@ export {
   type ContextMenuAction,
 }  from './react/ContextMenu'
 
+/**
+ * Exports the `waitElementPromise` function from the `./dom.helper` module.
+ */
 export { waitElementPromise } from "./dom.helper"
