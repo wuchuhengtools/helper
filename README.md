@@ -633,7 +633,7 @@ Monitor and report element's visible area.
 
 Contributions are welcome! Please feel free to:
 
-- 🐛 [Report bugs](https://github.com/wuchuheng/helper/issues)
+- 🐛 [Report bugs](https://github.com/wuchuhengtools/helper/issues)
 - 💡 [Request features](https://github.com/wuchuhengtools/helper/issues)
 - 🔧 Submit pull requests
 - 📖 Improve documentation
