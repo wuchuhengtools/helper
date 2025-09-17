@@ -249,7 +249,7 @@ export const sleep = (ms: number): Promise<void> => {
 export {
   ResizableWrapper,
   type ResizableWrapperProps,
-} from "./react/ResizeWrapper"
+} from "./react/ResizeWrapper/ResizeWrapper"
 
 /**
  * Exports the `VisibleAreaReporter` component and the `VisibleAreaInput` type from the `./react/VisibleAreaReporter` module.

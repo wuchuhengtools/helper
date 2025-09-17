@@ -76,7 +76,7 @@
   },
   "include": [
     "src/**/*"
-  ],
+, "src/react/ResizeWrapper/ResizableWrapper.stories.tsx"  ],
   "exclude": [
      "dist"
   ]

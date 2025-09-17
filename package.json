@@ -22,7 +22,10 @@
     "build:watch": "tsup --watch",
     "test": "jest --config=jest.config.js",
     "publish": "npm run build:release && npm publish --access public",
-    "dev": "tsup --watch --onSuccess \"echo Build completed!\""
+    "dev": "tsup --watch --onSuccess \"echo Build completed!\"",
+    "docs": "storybook dev -p 6006",
+    "docs:build": "storybook build -o docs/storybook",
+    "docs:serve": "npx http-server docs -p 8080 -o"
   },
   "homepage": "https://github.com/wuchuhengtools/helper",
   "repository": {
@@ -31,12 +34,23 @@
   },
   "license": "MIT",
   "devDependencies": {
+    "@storybook/addon-essentials": "^8.0.0",
+    "@storybook/addon-interactions": "^8.0.0",
+    "@storybook/addon-docs": "^8.0.0",
+    "@storybook/addon-controls": "^8.0.0",
+    "@storybook/addon-viewport": "^8.0.0",
+    "@storybook/react": "^8.0.0",
+    "@storybook/react-vite": "^8.0.0",
+    "@storybook/testing-library": "^0.2.0",
+    "storybook": "^8.0.0",
     "@types/jest": "^27.4.1",
     "@types/node": "^20.19.0",
     "@types/react": "^18.0.0",
     "@types/react-dom": "^18.0.0",
     "codecov": "^3.8.1",
     "jest": "^27.5.1",
+    "react": "^18.0.0",
+    "react-dom": "^18.0.0",
     "ts-jest": "^27.1.4",
     "tsup": "^8.5.0",
     "typescript": "^4.2.4"

@@ -1,6 +1,119 @@
 <h1 align="center"> helper助手库 </h1>
 
-<p align="center">A comprehensive utility library for JavaScript/TypeScript and React applications</p>
+<p align="center">A comprehensive# @wuchuheng/helper
+
+A modern collection of React components and utilities designed to simplify common UI patterns and interactions.
+
+## 🚀 Quick Start
+
+```bash
+npm install @wuchuheng/helper
+```
+
+```tsx
+import { ResizableWrapper } from '@wuchuheng/helper';
+
+function App() {
+  return (
+    <ResizableWrapper
+      minWidth={200}
+      maxWidth={600}
+      initialWidth={300}
+      borderWidth="4px"
+    >
+      <div style={{ padding: '20px' }}>
+        <h2>Resizable Content</h2>
+        <p>Drag the right edge to resize!</p>
+      </div>
+    </ResizableWrapper>
+  );
+}
+```
+
+## 📚 Documentation
+
+**👉 [Interactive Documentation (Storybook)](https://your-storybook-url.com)** - *Recommended*
+
+For the best experience with live examples, interactive controls, and comprehensive API documentation:
+
+```bash
+npm run docs
+```
+
+This launches Storybook at `http://localhost:6006` with:
+- 🎮 **Live Interactive Examples** - Test components in real-time
+- 🔧 **Dynamic Controls** - Adjust props without coding  
+- 📖 **Auto-generated API Docs** - From TypeScript interfaces
+- 📱 **Responsive Testing** - Multiple viewport sizes
+- 🎨 **Design System** - Complete styling examples
+
+## 📦 Components
+
+### ResizableWrapper
+A flexible container that allows horizontal resizing via drag interaction. Perfect for sidebars, panels, and adjustable layouts.
+
+**Features:**
+- 🖱️ Drag-to-resize functionality
+- 📏 Customizable constraints (min/max width)
+- 🎨 Visual feedback and hover states
+- 🔧 TypeScript support with full type safety
+- ⚡ Performance optimized event handling
+
+## 🛠️ Development
+
+```bash
+# Install dependencies
+npm install
+
+# Start development with documentation
+npm run docs
+
+# Run tests
+npm test
+
+# Build library
+npm run build
+
+# Build documentation for deployment
+npm run docs:build
+```
+
+## 📋 API Reference
+
+### ResizableWrapper Props
+
+| Prop | Type | Default | Description |
+|------|------|---------|-------------|
+| `children` | `ReactNode` | **Required** | Content to be wrapped |
+| `minWidth` | `number` | `200` | Minimum width in pixels |
+| `maxWidth` | `number` | `500` | Maximum width in pixels |
+| `initialWidth` | `number` | `240` | Initial width in pixels |
+| `borderWidth` | `string` | **Required** | Resize handle width |
+| `borderColor` | `string` | `"#ccc"` | Handle color |
+| `activeBorderColor` | `string` | `"#3b82f6"` | Active handle color |
+| `className` | `string` | `""` | Additional CSS classes |
+| `style` | `CSSProperties` | `{}` | Inline styles |
+
+## 🌐 Browser Support
+
+- Chrome 60+
+- Firefox 55+  
+- Safari 12+
+- Edge 79+
+
+## 📄 License
+
+MIT License - see [LICENSE](LICENSE) file for details.
+
+## 🔗 Links
+
+- [NPM Package](https://www.npmjs.com/package/@wuchuheng/helper)
+- [GitHub Repository](https://github.com/wuchuhengtools/helper)
+- [Interactive Documentation](https://your-storybook-url.com) *(Deploy Storybook for public link)*
+
+---
+
+Built with ❤️ using React, TypeScript, and Storybook.y library for JavaScript/TypeScript and React applications</p>
 
 ## 📚 Table of Contents
 
