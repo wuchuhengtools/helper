@@ -1,4 +1,6 @@
 import type { Preview } from '@storybook/react';
+import { themes } from '@storybook/theming';
+import { DocsContainer } from '@storybook/blocks';
 
 const preview: Preview = {
   parameters: {
@@ -11,6 +13,8 @@ const preview: Preview = {
     },
     docs: {
       toc: true,
+      theme: themes.light,
+      container: DocsContainer,
     },
     backgrounds: {
       default: 'light',
