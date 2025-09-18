@@ -24,7 +24,7 @@
     "publish": "npm run build:release && npm publish --access public",
     "dev": "tsup --watch --onSuccess \"echo Build completed!\"",
     "docs": "storybook dev -p 6006",
-    "docs:build": "storybook build -o docs/storybook",
+    "docs:build": "storybook build -o docs",
     "docs:serve": "npx http-server docs -p 8080 -o"
   },
   "homepage": "https://github.com/wuchuhengtools/helper",
