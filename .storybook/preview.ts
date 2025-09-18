@@ -1,10 +1,10 @@
-import type { Preview } from '@storybook/react';
-import { themes } from '@storybook/theming';
-import { DocsContainer } from '@storybook/blocks';
+import type { Preview } from "@storybook/react";
+import { DocsContainer } from "@storybook/blocks";
+import theme from "./theme";
 
 const preview: Preview = {
   parameters: {
-    actions: { argTypesRegex: '^on[A-Z].*' },
+    actions: { argTypesRegex: "^on[A-Z].*" },
     controls: {
       matchers: {
         color: /(background|color)$/i,
@@ -13,43 +13,43 @@ const preview: Preview = {
     },
     docs: {
       toc: true,
-      theme: themes.light,
+      theme: theme,
       container: DocsContainer,
     },
     backgrounds: {
-      default: 'light',
+      default: "light",
       values: [
         {
-          name: 'light',
-          value: '#ffffff',
+          name: "light",
+          value: "#ffffff",
         },
         {
-          name: 'dark',
-          value: '#333333',
+          name: "dark",
+          value: "#333333",
         },
       ],
     },
     viewport: {
       viewports: {
         mobile: {
-          name: 'Mobile',
+          name: "Mobile",
           styles: {
-            width: '375px',
-            height: '667px',
+            width: "375px",
+            height: "667px",
           },
         },
         tablet: {
-          name: 'Tablet',
+          name: "Tablet",
           styles: {
-            width: '768px',
-            height: '1024px',
+            width: "768px",
+            height: "1024px",
           },
         },
         desktop: {
-          name: 'Desktop',
+          name: "Desktop",
           styles: {
-            width: '1024px',
-            height: '768px',
+            width: "1024px",
+            height: "768px",
           },
         },
       },
