@@ -27,6 +27,7 @@ A flexible container that allows horizontal resizing via drag interaction. Perfe
 -   🎨 Visual feedback and hover states
 -   🔧 TypeScript support with full type safety
 -   ⚡ Performance optimized event handling
+-   🔄 Customizable resize handle side (top, right, bottom, left)
 
 ## 🛠️ Development
 
