@@ -332,3 +332,165 @@ export const WithCustomCallback: Story = {
     },
   },
 };
+
+/**
+ * ContextMenu positioning test for edge cases.
+ * Demonstrates automatic repositioning when near viewport boundaries.
+ */
+export const EdgeCasePositioning: Story = {
+  args: {
+    itemId: 5,
+    actions: [
+      { label: 'Action 1', onClick: (id) => console.log('Action 1 for:', id) },
+      { label: 'Action 2', onClick: (id) => console.log('Action 2 for:', id) },
+      { label: 'Action 3', onClick: (id) => console.log('Action 3 for:', id) },
+      { label: 'Action 4', onClick: (id) => console.log('Action 4 for:', id) },
+      { label: 'Action 5', onClick: (id) => console.log('Action 5 for:', id) },
+    ],
+  },
+  render: (args) => (
+    <div style={{ 
+      height: '100vh', 
+      width: '100vw', 
+      position: 'relative',
+      background: 'linear-gradient(45deg, #f0f8ff, #e6f3ff)',
+      padding: '20px',
+      boxSizing: 'border-box'
+    }}>
+      <div style={{
+        position: 'absolute',
+        top: '20px',
+        left: '20px',
+        color: '#2c3e50',
+        fontWeight: 'bold',
+        fontSize: '18px'
+      }}>
+        🧪 Context Menu Edge Case Testing
+      </div>
+      
+      {/* Top-left corner */}
+      <ContextMenu {...args} itemId={51}>
+        <div style={{
+          position: 'absolute',
+          top: '60px',
+          left: '20px',
+          padding: '15px',
+          backgroundColor: '#ff6b6b',
+          color: 'white',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          fontWeight: 'bold'
+        }}>
+          Top-Left Corner
+          <br />
+          <small>Should open down-right</small>
+        </div>
+      </ContextMenu>
+      
+      {/* Top-right corner */}
+      <ContextMenu {...args} itemId={52}>
+        <div style={{
+          position: 'absolute',
+          top: '60px',
+          right: '20px',
+          padding: '15px',
+          backgroundColor: '#4ecdc4',
+          color: 'white',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          fontWeight: 'bold'
+        }}>
+          Top-Right Corner
+          <br />
+          <small>Should open down-left</small>
+        </div>
+      </ContextMenu>
+      
+      {/* Bottom-left corner */}
+      <ContextMenu {...args} itemId={53}>
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          left: '20px',
+          padding: '15px',
+          backgroundColor: '#45b7d1',
+          color: 'white',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          fontWeight: 'bold'
+        }}>
+          Bottom-Left Corner
+          <br />
+          <small>Should open up-right</small>
+        </div>
+      </ContextMenu>
+      
+      {/* Bottom-right corner */}
+      <ContextMenu {...args} itemId={54}>
+        <div style={{
+          position: 'absolute',
+          bottom: '20px',
+          right: '20px',
+          padding: '15px',
+          backgroundColor: '#f7b731',
+          color: 'white',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          fontWeight: 'bold'
+        }}>
+          Bottom-Right Corner
+          <br />
+          <small>Should open up-left</small>
+        </div>
+      </ContextMenu>
+      
+      {/* Center element for normal behavior */}
+      <ContextMenu {...args} itemId={55}>
+        <div style={{
+          position: 'absolute',
+          top: '50%',
+          left: '50%',
+          transform: 'translate(-50%, -50%)',
+          padding: '20px',
+          backgroundColor: '#5f27cd',
+          color: 'white',
+          borderRadius: '8px',
+          cursor: 'pointer',
+          userSelect: 'none',
+          fontWeight: 'bold',
+          textAlign: 'center'
+        }}>
+          Center Element
+          <br />
+          <small>Normal positioning</small>
+        </div>
+      </ContextMenu>
+      
+      <div style={{
+        position: 'absolute',
+        bottom: '60px',
+        left: '50%',
+        transform: 'translateX(-50%)',
+        textAlign: 'center',
+        color: '#2c3e50',
+        fontSize: '14px',
+        lineHeight: '1.5'
+      }}>
+        <strong>Instructions:</strong> Right-click each colored box to test menu positioning.<br />
+        The menu should automatically adjust to stay within the viewport boundaries.
+      </div>
+    </div>
+  ),
+  parameters: {
+    layout: 'fullscreen',
+    docs: {
+      description: {
+        story: 'Test story for edge case positioning. The context menu automatically adjusts its position when triggered near viewport boundaries to prevent being cut off.',
+      },
+    },
+  },
+};

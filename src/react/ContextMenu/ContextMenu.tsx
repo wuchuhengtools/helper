@@ -11,6 +11,14 @@ type ContextMenuState = {
 };
 
 /**
+ * Interface for calculated menu positioning with overflow adjustments
+ */
+type MenuPosition = {
+  x: number;
+  y: number;
+};
+
+/**
  * Custom hook for managing context menu state and interactions
  * Provides methods to show/hide context menu and track its state
  */
@@ -105,6 +113,41 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ children, actions, onC
   const menuRef = useRef<HTMLDivElement>(null);
 
   /**
+   * Calculates optimal menu position considering viewport boundaries
+   * @param mouseX - Original mouse X coordinate
+   * @param mouseY - Original mouse Y coordinate
+   * @param menuElement - The menu DOM element to measure
+   * @returns Adjusted position that fits within viewport
+   */
+  const calculateMenuPosition = (mouseX: number, mouseY: number, menuElement: HTMLDivElement): MenuPosition => {
+    // 1. Input handling
+    const menuRect = menuElement.getBoundingClientRect();
+    const viewportWidth = window.innerWidth;
+    const viewportHeight = window.innerHeight;
+    
+    // 2. Core processing
+    let adjustedX = mouseX;
+    let adjustedY = mouseY;
+    
+    // 2.1 Check horizontal overflow and adjust
+    if (mouseX + menuRect.width > viewportWidth) {
+      adjustedX = mouseX - menuRect.width;
+      // Ensure menu doesn't go off the left edge
+      adjustedX = Math.max(0, adjustedX);
+    }
+    
+    // 2.2 Check vertical overflow and adjust
+    if (mouseY + menuRect.height > viewportHeight) {
+      adjustedY = mouseY - menuRect.height;
+      // Ensure menu doesn't go off the top edge
+      adjustedY = Math.max(0, adjustedY);
+    }
+    
+    // 3. Output handling
+    return { x: adjustedX, y: adjustedY };
+  };
+
+  /**
    * Handles right-click events on the wrapped component
    * @param e - Mouse event from the right-click
    */
@@ -131,7 +174,7 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ children, actions, onC
   };
 
   /**
-   * Sets up click-outside detection to close the context menu
+   * Sets up click-outside detection and menu positioning adjustment
    */
   useEffect(() => {
     /**
@@ -148,16 +191,35 @@ export const ContextMenu: React.FC<ContextMenuProps> = ({ children, actions, onC
       }
     };
 
+    /**
+     * Adjusts menu position after render to prevent viewport overflow
+     */
+    const adjustMenuPosition = () => {
+      // 1. Input handling
+      if (!menuRef.current || !contextMenu.visible) return;
+
+      // 2. Core processing
+      const adjustedPosition = calculateMenuPosition(contextMenu.x, contextMenu.y, menuRef.current);
+      
+      // 2.1 Apply adjusted position if different from original
+      if (adjustedPosition.x !== contextMenu.x || adjustedPosition.y !== contextMenu.y) {
+        menuRef.current.style.left = `${adjustedPosition.x}px`;
+        menuRef.current.style.top = `${adjustedPosition.y}px`;
+      }
+    };
+
     // 2. Core processing - Add listener when menu is visible
     if (contextMenu.visible) {
       document.addEventListener('mousedown', handleClickOutside);
+      // Adjust position after DOM update
+      setTimeout(adjustMenuPosition, 0);
     }
 
     // 3. Output handling - Cleanup function
     return () => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
-  }, [contextMenu.visible, hideContextMenu]);
+  }, [contextMenu.visible, contextMenu.x, contextMenu.y, hideContextMenu]);
 
   /**
    * Inline styles for the context menu container
